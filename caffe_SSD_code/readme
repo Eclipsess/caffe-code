@@ -1,1 +1,5 @@
-http://blog.csdn.net/u010167269/article/details/52851667
+1. create /ImageSets/Main
+2. sh Sy1109_create_list.sh
+3. sh Sy1122_create_data.sh
+4. modify labelmap_voc.prototxt
+5. go to ssd_run_code

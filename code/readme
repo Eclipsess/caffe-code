@@ -1,0 +1,12 @@
+to classify using caffe
+
+1. python create_remove_10%teet.py
+2. python createTXTlist.py
+3. sh createLMDB.sh
+4. modify ./../prototxt/ train.prototxt solver.prototxt
+5. sh train_finetuen.sh
+
+if detect:
+1. modify ./../prototxt/ deploy.prototxt
+2. inspect ./../models/
+2. python testval.py 

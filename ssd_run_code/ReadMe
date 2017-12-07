@@ -1,0 +1,2 @@
+1.traindataset python ssd_pascal.py (or ssd_pascal_resnet.py)
+2.detect       python ssd_detect.py
