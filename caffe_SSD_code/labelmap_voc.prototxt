@@ -1,0 +1,47 @@
+item {
+  name: "none_of_the_above"
+  label: 0
+  display_name: "background"
+}
+item {
+  name: "Stamp"
+  label: 1
+  display_name: "Stamp"
+}
+item {
+  name: "Pattern"
+  label: 2
+  display_name: "Pattern"
+}
+item {
+  name: "Number"
+  label: 3
+  display_name: "Number"
+}
+item {
+  name: "Mintmark"
+  label: 4
+  display_name: "Mintmark"
+}
+item {
+  name: "Colorcode"
+  label: 5
+  display_name: "Colorcode"
+}
+item {
+  name: "Reticle"
+  label: 6
+  display_name: "Reticle"
+}
+item {
+  name: "Postmark"
+  label: 7
+  display_name: "Postmark"
+}
+item {
+  name: "Side"
+  label: 8
+  display_name: "Side"
+}
+
+
