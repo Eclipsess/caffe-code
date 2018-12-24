@@ -1,5 +1,8 @@
-1. create /ImageSets/Main
-2. sh Sy1109_create_list.sh
-3. sh Sy1122_create_data.sh
+0. git clone this caffe_SSD_code in your major project rename as code and clone ssd_run_code putted in the same major project.
+1. cd code
+2. python createImageSetsMain.py to copy pics and xmls to datadir for training, generate trainval.txt and test.txt
+3. sh Sy1109_create_list.sh to create trainval.txt and test.txt pair the pic and xml list in current dir 
 4. modify labelmap_voc.prototxt
-5. go to ssd_run_code
+5. sh Sy1122_create_data.sh to create data from list above.
+5. cd ../ssd_run_code
+6. python ssd_pascal.py
