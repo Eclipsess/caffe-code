@@ -1,6 +1,6 @@
 #!/bin/bash
 
-root_dir=/home/sy/VOT/caffe/Stamp
+root_dir=../
 sub_dir=ImageSets/Main
 #get bash absolute path
 bash_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
