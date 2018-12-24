@@ -1,6 +1,6 @@
 from __future__ import print_function
 import sys
-sys.path.append('/home/sy/VOT/caffe/python')
+sys.path.append('/home/lq/caffe-ssd/python')
 import caffe
 from caffe.model_libs import *
 from google.protobuf import text_format
@@ -11,6 +11,7 @@ import shutil
 import stat
 import subprocess
 
+root_proj_path = '/home/lq/fire_detection'
 
 # Add extra layers on top of a "base" network (e.g. VGGNet or Inception).
 def AddExtraLayers(net, use_batchnorm=True, lr_mult=1):
@@ -70,7 +71,7 @@ def AddExtraLayers(net, use_batchnorm=True, lr_mult=1):
 ### Modify the following parameters accordingly ###
 # The directory which contains the caffe code.
 # We assume you are running the script at the CAFFE_ROOT.
-caffe_root = '/home/sy/VOT/caffe'
+caffe_root = '/home/lq/caffe-ssd'
 
 # Set true if you want to start training right after generating all files.
 run_soon = True
@@ -81,9 +82,9 @@ resume_training = True
 remove_old_models = False
 
 # The database file for training data. Created by data/VOC0712/create_data.sh
-train_data = "/home/sy/VOT/caffe/Stamp/examples/Stampdata/Stampdata_trainval_lmdb"
+train_data = root_proj_path + "/examples/fire_data/fire_data_trainval_lmdb"
 # The database file for testing data. Created by data/VOC0712/create_data.sh
-test_data = "/home/sy/VOT/caffe/Stamp/examples/Stampdata/Stampdata_test_lmdb"
+test_data = root_proj_path + "/examples/fire_data/fire_data_test_lmdb"
 # Specify the batch sampler.
 resize_width = 300
 resize_height = 300
@@ -236,16 +237,16 @@ else:
 # Modify the job name if you want.
 job_name = "SSD_{}".format(resize)
 # The name of the model. Modify it if you want.
-model_name = "VGG_Stamp_{}".format(job_name)
+model_name = "VGG_fire_{}".format(job_name)
 
 # Directory which stores the model .prototxt file.
-save_dir = "Stamp/models/VGGNet/prototxt"
+save_dir = root_proj_path + "/models/VGGNet/prototxt"
 # Directory which stores the snapshot of models.
-snapshot_dir = "Stamp/models/VGGNet/{}".format(job_name)
+snapshot_dir = root_proj_path + "/models/VGGNet/{}".format(job_name)
 # Directory which stores the job script and log file.
-job_dir = "Stamp/jobs/VGGNet/{}".format(job_name)
+job_dir = root_proj_path + "/jobs/VGGNet/{}".format(job_name)
 # Directory which stores the detection results.
-output_result_dir = "/home/sy/VOT/caffe/Stamp/results"
+output_result_dir = root_proj_path + "/results"
 # model definition files.
 train_net_file = "{}/train.prototxt".format(save_dir)
 test_net_file = "{}/test.prototxt".format(save_dir)
@@ -260,13 +261,13 @@ job_file = "{}/{}.sh".format(job_dir, model_name)
 #name_size_file = "BOTDA/code/test_name_size.txt"
 # The pretrained model. We use the Fully convolutional reduced (atrous) VGGNet.
 # Suiyang modified 2017-11-10 
-pretrain_model = "/home/sy/VOT/caffe/models/VGGNet/VGG_ILSVRC_16_layers_fc_reduced.caffemodel"
+pretrain_model = "/home/lq/fire_detection/VGG_ILSVRC_16_layers_fc_reduced.caffemodel"
 #pretrain_model = "models/VGGNet/VGG_VOC0712_SSD_300x300_iter_120000.caffemodel"
 # Stores LabelMapItem.
-label_map_file = "Stamp/code/labelmap_voc.prototxt"
+label_map_file = root_proj_path + "/code/labelmap_voc.prototxt"
 
 # MultiBoxLoss parameters.
-num_classes = 9
+num_classes = 2
 share_location = True
 background_label_id=0
 train_on_diff_gt = True
@@ -361,7 +362,7 @@ elif normalization_mode == P.Loss.FULL:
 
 # Evaluate on whole test set.
 # 458train 197test
-num_test_image = 397
+num_test_image = 128
 test_batch_size = 4
 # Ideally test_batch_size should be divisible by num_test_image,
 # otherwise mAP will be slightly off the true value.
@@ -372,13 +373,13 @@ solver_param = {
     'base_lr': base_lr,
     'weight_decay': 0.0005,
     'lr_policy': "multistep",
-    'stepvalue': [80000, 100000, 120000],
+    'stepvalue': [60000, 100000, 120000],
     'gamma': 0.1,
     'momentum': 0.9,
     'iter_size': iter_size,
     'max_iter': 500000,
     'snapshot': 80000,
-    'display': 10,
+    'display': 100,
     'average_loss': 10,
     'type': "SGD",
     'solver_mode': solver_mode,
